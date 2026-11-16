@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project — Hardik Zode</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<script src="details.js"></script>
+<script src="arch.js"></script>
+<style>
+:root{--bg:#f2efea;--paper:#faf8f4;--ink:#121212;--ink2:#2a2a2a;--mute:#8c877f;--line:#dcd6cd;--card:#e8e4dd;--dark:#121212;--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--bg)}
+body{color:var(--ink);font:400 17px/1.55 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.mono{font-family:"JetBrains Mono",monospace}
+.top{position:sticky;top:0;z-index:20;background:rgba(242,239,234,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.mg{display:inline-flex;align-items:center;gap:12px;font-weight:700;letter-spacing:-.02em}
+.mg b{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:var(--dark);color:#faf7f3;font-size:14px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:11px;background:var(--dark);color:#faf7f3;font-weight:600;font-size:14px;transition:transform .3s var(--ease)}
+.pill.l{background:var(--card);color:var(--ink)}
+.pill:hover{transform:translateY(-2px)}
+.hero{padding:64px 0 34px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font:500 12px "JetBrains Mono",monospace;padding:6px 10px;border-radius:8px;background:var(--card);color:var(--ink2)}
+h1{font-size:clamp(48px,9vw,112px);font-weight:800;letter-spacing:-.06em;line-height:.92;margin:22px 0 18px;font-stretch:90%}
+.tl{font-size:clamp(20px,2.4vw,27px);letter-spacing:-.02em;line-height:1.3;max-width:30ch;color:var(--ink2)}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
+.nums div{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px}
+.nums b{display:block;font-size:clamp(22px,2.6vw,32px);font-weight:800;letter-spacing:-.04em;line-height:1.05}
+.nums span{display:block;color:var(--mute);font-size:14px;margin-top:6px}
+.shot{margin-top:40px;border-radius:22px;overflow:hidden;background:#0f0f12;box-shadow:0 40px 80px -40px rgba(0,0,0,.5)}
+.shot .tb{display:flex;gap:6px;align-items:center;padding:11px 14px;color:#9b968f;font:12px "JetBrains Mono",monospace}
+.shot .tb i{width:9px;height:9px;border-radius:50%;background:#3a3a3e}
+.shot .tb span{margin-left:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shot img{display:block;width:100%;height:auto}
+sec,section{display:block;padding:56px 0 0}
+.lbl{font:500 12px "JetBrains Mono",monospace;letter-spacing:.1em;color:var(--mute);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.lbl::before{content:"";width:8px;height:8px;border-radius:50%;background:#e8590c}
+h2{font-size:clamp(32px,4.4vw,52px);font-weight:700;letter-spacing:-.045em;line-height:1;margin:12px 0 24px}
+.ov p{font-size:19px;max-width:68ch;color:var(--ink2)}
+.ov p+p{margin-top:14px}
+.archbox{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:22px}
+.flow{counter-reset:s;display:grid;gap:10px;max-width:820px}
+.flow li{list-style:none;counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-radius:16px}
+.flow li::before{content:counter(s,decimal-leading-zero);font:600 14px "JetBrains Mono",monospace;background:var(--dark);color:#faf7f3;border-radius:9px;display:grid;place-items:center;height:30px}
+.secs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.secs article{background:var(--dark);color:#e9e5df;border-radius:20px;padding:24px}
+.secs h3{color:#faf7f3;font-size:21px;letter-spacing:-.03em;margin-bottom:10px}
+.secs p{font-size:16px;color:#bdb8b0}
+.stk{border-top:1px solid var(--line)}
+.stk div{display:grid;grid-template-columns:200px 1fr;gap:20px;padding:15px 0;border-bottom:1px solid var(--line)}
+.stk b{font-weight:600}
+.stk span{color:var(--ink2)}
+.docs{display:flex;flex-wrap:wrap;gap:10px}
+.docs a{font:500 14px "JetBrains Mono",monospace;padding:10px 14px;border-radius:11px;background:var(--paper);border:1px solid var(--line);transition:background .25s}
+.docs a:hover{background:var(--card)}
+.note{color:var(--mute);font-size:14px;margin-top:14px}
+.nx{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:72px 0 80px}
+.nx a{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px;transition:transform .35s var(--ease)}
+.nx a:hover{transform:translateY(-3px)}
+.nx small{color:var(--mute);font:12px "JetBrains Mono",monospace}
+.nx b{display:block;font-size:26px;letter-spacing:-.04em;margin-top:6px}
+.nx a:last-child{text-align:right}
+.miss{padding:120px 0;text-align:center}
+.fu{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.fu.in{opacity:1;transform:none}
+@media (max-width:800px){.wrap{padding:0 16px}.nums{grid-template-columns:repeat(2,1fr)}.secs{grid-template-columns:1fr}.stk div{grid-template-columns:1fr;gap:4px}.hero{padding-top:40px}.archbox{padding:14px;border-radius:18px}.nx{grid-template-columns:1fr}.nx a:last-child{text-align:left}.top .hide{display:none}}
+@media (prefers-reduced-motion:reduce){.fu{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="mg" href="./#projects"><b>HZ</b><span>← All projects</span></a><span class="mono hide" style="color:var(--mute);font-size:13px" id="crumb"></span><a class="pill" href="./#contact">Talk to me</a></div></header>
+<main class="wrap" id="m"></main>
+<script>
+const H = HZ, D = HZ_DETAILS, ids = Object.keys(D);
+const id = new URLSearchParams(location.search).get("p"), p = H.projects.find(x => x.id === id), d = D[id];
+const SHOT = { xgbright: ["shots/xgbright.jpg", "localhost:5180 · XGBright dashboard"], zcs: ["shots/zcs-dashboard.jpg", "ZCS · tenant dashboard"], talentlens: ["shots/talentlens.jpg", "talent-lens-omega.vercel.app"], vecquery: ["shots/vecquery.jpg", "localhost:5173 · VecQuery"], pingify: ["shots/pingify.jpg", "pingify-h8jn.onrender.com"], fundify: ["shots/fundify.jpg", "localhost:3000/dashboard"] };
+const LIVE = { zcs: "https://zcs-2eq.pages.dev/" };
+const m = document.getElementById("m"), gh = f => `${H.github}/${p.repo}/blob/HEAD/${f}`;
+if (!p || !d) {
+  m.innerHTML = `<div class="miss"><h1 style="font-size:64px">Not found</h1><p>That project doesn’t have a write-up yet.</p><div class="acts" style="justify-content:center"><a class="pill" href="./#projects">Back to projects</a></div></div>`;
+} else {
+  document.title = `${p.name} — Hardik Zode`;
+  document.getElementById("crumb").textContent = `projects / ${p.id}`;
+  const live = d.live || LIVE[id], i = ids.indexOf(id), prev = D[ids[(i - 1 + ids.length) % ids.length]] && ids[(i - 1 + ids.length) % ids.length], next = ids[(i + 1) % ids.length];
+  const nm = k => H.projects.find(x => x.id === k).name;
+  m.innerHTML = `
+  <div class="hero">
+    <div class="tags fu">${p.paths.map(x => `<span class="tag">${H.path(x).name}</span>`).join("")}<span class="tag">${p.date.slice(0, 7)}</span><span class="tag">${p.lang}</span></div>
+    <h1 class="fu">${p.name}</h1>
+    <p class="tl fu">${d.tagline}</p>
+    <div class="acts fu"><a class="pill" href="#architecture">Architecture ↓</a>${live ? `<a class="pill l" href="${live}" target="_blank" rel="noopener">Live ↗</a>` : ""}${p.repo ? `<a class="pill l" href="${H.url(p)}" target="_blank" rel="noopener">Code ↗</a>` : ""}</div>
+    <div class="nums fu">${d.numbers.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join("")}</div>
+    ${SHOT[id] ? `<div class="shot fu"><div class="tb"><i></i><i></i><i></i><span>${SHOT[id][1]}</span></div><img src="${SHOT[id][0]}" alt="${p.name} screenshot"></div>` : ""}
+  </div>
+  <section class="ov"><div class="lbl fu">Overview</div><h2 class="fu">What it is</h2>${d.overview.map(t => `<p class="fu">${t}</p>`).join("")}</section>
+  <section id="architecture"><div class="lbl fu">Architecture</div><h2 class="fu">How it’s put together</h2><div class="archbox fu">${HZArch.render(d.arch)}</div><p class="note">Drawn from the repo’s README and docs. Arrows follow requests and data.</p></section>
+  <section><div class="lbl fu">Flow</div><h2 class="fu">How it works</h2><ol class="flow" style="padding:0">${d.flow.map(t => `<li class="fu"><span>${t}</span></li>`).join("")}</ol></section>
+  ${d.sections.length ? `<section><div class="lbl fu">Details</div><h2 class="fu">Under the hood</h2><div class="secs">${d.sections.map(([h, t]) => `<article class="fu"><h3>${h}</h3><p>${t}</p></article>`).join("")}</div></section>` : ""}
+  <section><div class="lbl fu">Stack</div><h2 class="fu">Built with</h2><div class="stk fu">${d.stack.map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join("")}</div></section>
+  ${p.repo ? `<section><div class="lbl fu">Sources</div><h2 class="fu">Read the docs</h2><div class="docs fu">${d.docs.map(f => `<a href="${gh(f)}" target="_blank" rel="noopener">${f} ↗</a>`).join("")}</div></section>` : ""}
+  <nav class="nx"><a href="project.html?p=${prev}"><small>← Previous</small><b>${nm(prev)}</b></a><a href="project.html?p=${next}"><small>Next →</small><b>${nm(next)}</b></a></nav>`;
+}
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px" });
+document.querySelectorAll(".fu").forEach(el => io.observe(el));
+if (location.hash) setTimeout(() => document.querySelector(location.hash)?.scrollIntoView(), 200);
+</script>
+</body>
+</html>

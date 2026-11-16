@@ -63,7 +63,7 @@ window.HZ = {
       blurb: "Resume screening for a non-technical HR team: extracts facts, sorts by role, ranks against two job descriptions and explains every ranking in plain language.",
       stack: ["Next.js 16", "Postgres", "Groq", "Vercel"], repo: "growth-for-impact-task" },
     { id: "sanctuary", name: "Sanctuary OS", ticker: "SNCT", paths: ["ai", "web"], date: "2025-12-21", commits: 7, size: 88, lang: "TypeScript",
-      stat: "4", statLabel: "breathing protocols",
+      stat: "5", statLabel: "breathing protocols",
       blurb: "Stress & anxiety toolkit: Gemini-powered stress analysis, guided 4-7-8 and box breathing, grounding exercises.",
       stack: ["Gemini", "Node", "bcrypt"], repo: "sanctuary-mindkit" },
     { id: "pingify", name: "Pingify", ticker: "PING", paths: ["web", "cloud"], date: "2025-12-24", commits: 39, size: 6418, lang: "JavaScript",

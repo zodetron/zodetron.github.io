@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="data.js"></script>
 <script src="fluid.js"></script>
+<script src="details.js"></script>
+<script src="arch.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <style>
@@ -456,6 +458,12 @@ footer .bot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;c
 @media (max-width:640px){.wk .hw figcaption{font-size:9px;padding:5px 1px 6px}.wk .hw{padding:5px 5px 0}}
 .pl2{font-size:14px;font-weight:600;padding:7px 12px;border-radius:9px;background:var(--card);transition:background .25s,color .25s}
 .pl2:hover{background:var(--dark);color:#faf7f3}
+.pl2.dk{background:var(--dark);color:#faf7f3}.pl2.dk:hover{background:#e8590c}
+.index .ir em.ab{font:500 10.5px "JetBrains Mono",monospace;font-style:normal;margin-left:10px;padding:3px 7px;border-radius:6px;background:var(--dark);color:#faf7f3;vertical-align:3px;letter-spacing:.04em}
+.dc .b.wide{width:min(1020px,100%)}
+.dc .acts2{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.dc .archwrap{margin-top:22px;padding:16px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.dc .archwrap:empty{display:none}
 
 /* ===== Template 2: Aaftab-style navbar ===== */
 .nav{display:none!important}
@@ -694,7 +702,7 @@ footer .bot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;c
   <div class="bot wrap"><span>© 2026 Hardik Zode</span><span id="ftime"></span><a data-go="home" style="cursor:pointer">Back to top ↑</a></div>
 </footer>
 
-<div class="dc" id="dc"><div class="b" id="dcb"></div></div>
+<div class="dc" id="dc"><div class="b" id="dcb" data-lenis-prevent></div></div>
 
 <script>
 const H = HZ, $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)], P = id => H.projects.find(p => p.id === id);
@@ -764,8 +772,8 @@ const FEAT = ["xgbright", "zcs", "talentlens", "pingify", "vecquery", "fundify"]
 $("#wk").innerHTML = FEAT.map((id, i) => { const p = P(id), [c1, c2, c3] = PAL[id], [img, url, src] = SHOT[id];
   return `<a class="wk fu" data-p="${id}" style="--d:${(i % 2) * .1}s"><div class="art" style="--c1:${c1};--c2:${c2};--c3:${c3}"><div class="win shot${HW[id] ? " withhw" : ""}"><div class="tb"><i></i><i></i><i></i><span>${url}</span></div><img src="${img}" alt="${p.name} screenshot" loading="lazy"></div>${HW[id] ? `<figure class="hw"><img src="${HW[id][0]}" alt="${HW[id][1]}" loading="lazy"><figcaption>${HW[id][1]}</figcaption></figure>` : ""}<span class="src">${src}</span></div>
   <div class="meta"><h3>${p.name}</h3><span>${p.stack.slice(0, 4).join(" · ")}</span></div><p>${p.blurb}</p>
-  <div class="plinks">${LIVE[id] ? `<span class="pl2" onclick="event.stopPropagation();open('${LIVE[id]}','_blank')">Live ↗</span>` : ""}<span class="pl2" onclick="event.stopPropagation();open('${H.url(p)}','_blank')">Code ↗</span></div></a>`; }).join("");
-const renderIdx = f => { $("#idx").innerHTML = (f ? H.byPath(f) : H.sorted().reverse()).map((p, i) => `<div class="ir" data-p="${p.id}"><span class="n">${String(i + 1).padStart(2, "0")}</span><b>${p.name}</b><span class="p">${p.paths.map(x => H.path(x).name).join(" · ")}</span><span class="d">${p.date.slice(0, 7)}</span><span class="s">${p.stat}</span></div>`).join(""); };
+  <div class="plinks"><span class="pl2 dk" onclick="event.stopPropagation();openCard(P('${id}'),true)">Architecture</span><span class="pl2" onclick="event.stopPropagation();location.href='project.html?p=${id}'">Read more →</span>${LIVE[id] ? `<span class="pl2" onclick="event.stopPropagation();open('${LIVE[id]}','_blank')">Live ↗</span>` : ""}<span class="pl2" onclick="event.stopPropagation();open('${H.url(p)}','_blank')">Code ↗</span></div></a>`; }).join("");
+const renderIdx = f => { $("#idx").innerHTML = (f ? H.byPath(f) : H.sorted().reverse()).map((p, i) => `<div class="ir" data-p="${p.id}"><span class="n">${String(i + 1).padStart(2, "0")}</span><b>${p.name}${HZ_DETAILS[p.id] ? '<em class="ab">ARCH</em>' : ""}</b><span class="p">${p.paths.map(x => H.path(x).name).join(" · ")}</span><span class="d">${p.date.slice(0, 7)}</span><span class="s">${p.stat}</span></div>`).join(""); };
 [["", "All"], ...H.paths.map(p => [p.id, p.name])].forEach(([id, t], i) => { const b = document.createElement("button"); b.textContent = t; if (!i) b.className = "on"; b.onclick = () => { $$("#flt button").forEach(x => x.classList.toggle("on", x === b)); renderIdx(id); }; $("#flt").appendChild(b); });
 renderIdx("");
 
@@ -883,10 +891,16 @@ $("#ql").innerHTML = SECTIONS.map(([id, t]) => `<a data-go="${id}" style="cursor
 
 /* ---------- project detail ---------- */
 const dc = $("#dc");
-function openCard(p) {
-  $("#dcb").innerHTML = `<button class="x" aria-label="Close">✕</button><span class="tag">${p.paths.map(x => H.path(x).name).join(" · ")}</span><h3>${p.name}</h3><div class="st">${p.stat}</div><div class="sl">${p.statLabel}</div><p>${p.blurb}</p>
-    <div class="tags">${p.stack.map(s => `<span class="tag">${s}</span>`).join("")}</div><div style="margin-top:22px"><a class="btn d" href="${H.url(p)}" target="_blank" rel="noopener">View on GitHub ↗</a></div>`;
+function openCard(p, arch) {
+  const d = HZ_DETAILS[p.id], b = $("#dcb");
+  b.innerHTML = `<button class="x" aria-label="Close">✕</button><span class="tag">${p.paths.map(x => H.path(x).name).join(" · ")}</span><h3>${p.name}</h3><div class="st">${p.stat}</div><div class="sl">${p.statLabel}</div><p>${d ? d.tagline + " " : ""}${p.blurb}</p>
+    <div class="tags">${p.stack.map(s => `<span class="tag">${s}</span>`).join("")}</div>
+    <div class="acts2">${d ? `<button class="btn d" id="archbtn">${arch ? "Hide architecture" : "Architecture"}</button><a class="btn" style="background:var(--card)" href="project.html?p=${p.id}">Full write-up →</a>` : ""}<a class="btn" style="background:var(--card)" href="${H.url(p)}" target="_blank" rel="noopener">GitHub ↗</a></div>
+    <div class="archwrap" id="archwrap"></div>`;
+  const show = on => { b.classList.toggle("wide", on); $("#archwrap").innerHTML = on ? HZArch.render(d.arch) : ""; if ($("#archbtn")) $("#archbtn").textContent = on ? "Hide architecture" : "Architecture"; };
+  if (d) { show(!!arch); $("#archbtn").onclick = () => show(!$("#archwrap").innerHTML); } else b.classList.remove("wide");
   dc.classList.add("on"); $("#dcb .x").onclick = closeCard;
+  if (arch) setTimeout(() => $("#archwrap").scrollIntoView({ block: "nearest" }), 350);
 }
 function closeCard() { dc.classList.remove("on"); }
 dc.onclick = e => { if (e.target === dc) closeCard(); };
